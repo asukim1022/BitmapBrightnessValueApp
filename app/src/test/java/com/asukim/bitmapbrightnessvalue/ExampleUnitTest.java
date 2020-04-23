@@ -1,4 +1,4 @@
-package com.asukim.brightness;
+package com.asukim.bitmapbrightnessvalue;
 
 import org.junit.Test;
 
