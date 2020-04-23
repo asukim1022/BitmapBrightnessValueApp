@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView image;
     private int resizedBackgroundBrightness = 0;
     TextView textView;
-
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
