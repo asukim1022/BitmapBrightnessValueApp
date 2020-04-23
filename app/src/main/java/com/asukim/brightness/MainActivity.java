@@ -31,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //임의의 이미지를 선택하기 위해 갤러리 사용
         Button galleryBtn = (Button) findViewById(R.id.galleryBtn);
         galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //intent로 이미지 선택
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                     image.setImageBitmap(bitmap);
 
+                    //bitmap의 밝기값 계산
                     float[] temp = calculateBrightnessEstimate(bitmap, 1);
                     resizedBackgroundBrightness = (int) temp[0];
 
@@ -72,13 +76,17 @@ public class MainActivity extends AppCompatActivity {
 
                 int brightness = resizedBackgroundBrightness;
                 int colorInt = getColorStringFromBrightness(brightness);
+
+                //colorStr : bitmap이미지 위의 텍스트의 컬러값 출력
                 String colorStr = "white";
 
                 if (colorInt == 1) {
                     colorStr = "white";
+                    //어두운 이미지에는 흰색의 텍스트 출력
                     textView.setTextColor(getResources().getColor(R.color.white));
                 } else if (colorInt == 2) {
                     colorStr = "black";
+                    //밝은 이미지에는 검정색의 텍스트 출력
                     textView.setTextColor(getResources().getColor(R.color.black));
                 }
 
@@ -117,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //컬러의 값을 밝기로값으로 가져오기
     private static int getColorToBrightness(int color) {
         int R = Color.red(color);
         int G = Color.green(color);
@@ -125,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //bitmap의 밝기값을 매개값에 넣는다. 리턴값으로 bitmap이미지위의 텍스트 색상 출력
     private int getColorStringFromBrightness(int brightness) {
         if (brightness < 195) {
             return 1;
